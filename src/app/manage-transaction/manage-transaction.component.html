@@ -11,27 +11,32 @@
       {{ isEdit ? 'Edit' : 'Add New' }} Transaction
     </p>
   </div>
-  <div class="btn-group mt-2 mx-2 rounded-0">
-    <label
-      class="btn btn-outline-primary rounded-0"
-      [(ngModel)]="defaultValue.type"
-      btnRadio="income"
-      name="type"
-      role="button"
-      >Income</label
-    >
-    <label
-      class="btn btn-outline-primary rounded-0"
-      name="type"
-      [(ngModel)]="defaultValue.type"
-      btnRadio="expenses"
-      role="button"
-      >Expenses</label
-    >
-  </div>
   <!-- <pre>{{ transactionForm.value | json }}</pre> -->
   <form #transactionForm="ngForm" class="offcanvas-body p-0">
     <ul class="list-group">
+      <li class="list-group-item w-100">
+        <label class="form-label m-0 p-0"
+          >Transaction Type <code>*</code></label
+        >
+        <div class="btn-group mt-2 mx-2 rounded-0 w-100">
+          <label
+            class="btn btn-outline-primary rounded-0"
+            [(ngModel)]="defaultValue.type"
+            btnRadio="income"
+            name="type"
+            role="button"
+            >Income</label
+          >
+          <label
+            class="btn btn-outline-primary rounded-0"
+            name="type"
+            [(ngModel)]="defaultValue.type"
+            btnRadio="expenses"
+            role="button"
+            >Expenses</label
+          >
+        </div>
+      </li>
       <li class="list-group-item">
         <div class="mb-3">
           <label for="transactionName" class="form-label"
