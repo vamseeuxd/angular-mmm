@@ -1,0 +1,5 @@
+.transaction-list {
+  overflow: hidden auto;
+  max-height: calc(100vh - 410px);
+  min-height: calc(100vh - 410px);
+}

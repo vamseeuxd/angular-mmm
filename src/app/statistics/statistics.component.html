@@ -1,0 +1,64 @@
+<tabset [justified]="true">
+  <tab class="border p-2 border-top-0" heading="All"
+    ><ng-container
+      *ngTemplateOutlet="
+        greet;
+        context: {
+          income: incomeTotal,
+          expense: expensesTotal,
+          balance: incomeTotal - expensesTotal,
+          isBalance: true
+        }
+      "
+    ></ng-container
+  ></tab>
+  <tab class="border p-2 border-top-0" heading="Settled"
+    ><ng-container
+      *ngTemplateOutlet="
+        greet;
+        context: {
+          income: incomeSettledTotal,
+          expense: expensesSettledTotal,
+          balance: 0,
+          isBalance: false
+        }
+      "
+    ></ng-container
+  ></tab>
+  <tab class="border p-2 border-top-0" heading="Not Settle"
+    ><ng-container
+      *ngTemplateOutlet="
+        greet;
+        context: {
+          income: incomeNotSettledTotal,
+          expense: expensesNotSettledTotal,
+          balance: 0,
+          isBalance: false
+        }
+      "
+    ></ng-container
+  ></tab>
+</tabset>
+
+<ng-template
+  #greet
+  let-expense="expense"
+  let-income="income"
+  let-balance="balance"
+  let-isBalance="isBalance"
+>
+  <ul class="list-group w-100 text-center list-group-horizontal">
+    <li class="list-group-item col text-success">
+      Income
+      <h4>{{ income }}</h4>
+    </li>
+    <li class="list-group-item col text-danger">
+      Expenses
+      <h4>{{ expense }}</h4>
+    </li>
+    <!-- <li *ngIf="isBalance" class="list-group-item col text-primary">
+      Balance
+      <h4>{{ balance }}</h4>
+    </li> -->
+  </ul>
+</ng-template>

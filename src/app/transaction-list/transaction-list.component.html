@@ -1,0 +1,91 @@
+<ul
+  #listView
+  [style.maxHeight.px]="windowHeight - 310"
+  [style.minHeight.px]="windowHeight - 310"
+  class="w-100 list-group list-group-flush transaction-list pt-2"
+>
+  <h4 *ngIf="list.length === 0" class="text-muted text-center my-5">
+    No Transactions to show
+  </h4>
+  <li
+    *ngFor="let i of list"
+    [class.paid]="i?.isSettled"
+    [class.not-paid]="!i?.isSettled"
+    class="list-group-item d-flex mb-2 mx-2 shadow"
+  >
+    <div
+      class="
+        d-flex
+        flex-row
+        w-100
+        justify-content-between
+        align-items-center
+        pe-3
+      "
+    >
+      <div class="d-flex flex-column">
+        <span>{{ i.name }}</span>
+        <!-- <span style="font-size:12px">{{ i?.id }}</span> -->
+        <span class="text-danger" style="font-size:12px"
+          >Due: {{ i.dueDate }}</span
+        >
+      </div>
+      <span class="fw-bold text-success">{{ i.amount | currency: 'INR' }}</span>
+    </div>
+    <!-- <pre> {{ i | json }}</pre> -->
+
+    <ng-template #popTemplate>
+      <ul class="list-group m-0">
+        <li
+          (click)="pop.hide(); edit.emit(i.id)"
+          role="button"
+          class="list-group-item text-primary"
+        >
+          <i class="me-2 fa fa-edit"></i> Edit
+        </li>
+        <li
+          (click)="pop.hide(); remove.emit(i.id)"
+          role="button"
+          class="list-group-item text-danger"
+        >
+          <i class="me-2 fa fa-trash"></i> Delete
+        </li>
+        <li
+          *ngIf="!i?.isSettled"
+          (click)="pop.hide(); markAsPaid.emit(i)"
+          role="button"
+          class="list-group-item text-success"
+        >
+          <i class="me-2 fa fa-check"></i> Mark as Paid
+        </li>
+        <li
+          *ngIf="i?.isSettled"
+          (click)="pop.hide(); markAsNotPaid.emit(i)"
+          role="button"
+          class="list-group-item text-danger"
+        >
+          <i class="me-2 fa fa-ban"></i> Mark as Not Paid
+        </li>
+        <li
+          (click)="pop.hide(); clone.emit(i)"
+          role="button"
+          class="list-group-item text-secondary"
+        >
+          <i class="me-2 fa fa-copy"></i> Clone
+        </li>
+      </ul>
+    </ng-template>
+
+    <button
+      #pop="bs-popover"
+      type="button"
+      class="bg-transparent ms-auto border-0"
+      [popover]="popTemplate"
+      containerClass="action-bar-popover"
+      [outsideClick]="true"
+      placement="left"
+    >
+      <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+    </button>
+  </li>
+</ul>

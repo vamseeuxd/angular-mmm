@@ -1,0 +1,13 @@
+.transaction-list {
+  overflow: hidden auto;
+  max-height: calc(100vh - 310px);
+  min-height: calc(100vh - 310px);
+}
+
+.list-group-item.paid {
+  border-left: 5px solid #198754;
+}
+
+.list-group-item.not-paid {
+  border-left: 5px solid #dc3545;
+}

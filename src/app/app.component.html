@@ -1,0 +1,44 @@
+<app-header (selectedMonth)="selectedMonth($event)"></app-header>
+<app-side-menu></app-side-menu>
+<app-right-side-menu></app-right-side-menu>
+<app-manage-transaction
+  #manageTransaction
+  (addTransaction)="addTransaction($event)"
+></app-manage-transaction>
+<div class="card mx-2 shadow pb-2" style="margin-top:70px;">
+  <div class="card m-2">
+    <div class="card-body">
+      <app-statistics [list]="list"></app-statistics>
+    </div>
+  </div>
+  <tabset class="mx-2" [justified]="true">
+    <tab class="border border-top-0" heading="Income">
+      <div class="row">
+        <app-transaction-list
+          (edit)="editTransaction($event, manageTransaction)"
+          (markAsPaid)="markAsPaid($event)"
+          (markAsNotPaid)="markAsNotPaid($event)"
+          (remove)="removeTransaction($event)"
+          [list]="list | filterBy: ['type']:'income'"
+        ></app-transaction-list>
+      </div>
+    </tab>
+    <tab class="border border-top-0" heading="Expenses">
+      <div class="row">
+        <app-transaction-list
+          (edit)="editTransaction($event, manageTransaction)"
+          (markAsPaid)="markAsPaid($event)"
+          (markAsNotPaid)="markAsNotPaid($event)"
+          (remove)="removeTransaction($event)"
+          [list]="list | filterBy: ['type']:'expenses'"
+        ></app-transaction-list>
+      </div>
+    </tab>
+  </tabset>
+</div>
+
+<!-- 
+
+  breakup-transaction
+
+ -->

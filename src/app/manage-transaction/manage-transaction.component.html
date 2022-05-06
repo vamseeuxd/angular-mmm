@@ -1,0 +1,156 @@
+<div
+  class="offcanvas offcanvas-bottom"
+  data-bs-scroll="false"
+  data-bs-backdrop="true"
+  tabindex="-1"
+  id="manageTransaction"
+  aria-labelledby="manageTransactionLabel"
+>
+  <div class="offcanvas-header bg-primary text-white">
+    <p class="offcanvas-title m-0 p-0" id="manageTransactionLabel">
+      {{ isEdit ? 'Edit' : 'Add New' }} Transaction
+    </p>
+  </div>
+  <div class="btn-group mt-2 mx-2 rounded-0">
+    <label
+      class="btn btn-outline-primary rounded-0"
+      [(ngModel)]="defaultValue.type"
+      btnRadio="income"
+      name="type"
+      role="button"
+      >Income</label
+    >
+    <label
+      class="btn btn-outline-primary rounded-0"
+      name="type"
+      [(ngModel)]="defaultValue.type"
+      btnRadio="expenses"
+      role="button"
+      >Expenses</label
+    >
+  </div>
+  <!-- <pre>{{ transactionForm.value | json }}</pre> -->
+  <form #transactionForm="ngForm" class="offcanvas-body p-0">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <div class="mb-3">
+          <label for="transactionName" class="form-label"
+            >Title <code>*</code></label
+          >
+          <input
+            type="text"
+            name="name"
+            required
+            [ngModel]="defaultValue.name"
+            class="form-control"
+            id="transactionName"
+            placeholder="Title"
+          />
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="mb-3">
+          <label for="transactionAmount" class="form-label"
+            >Amount<code>*</code></label
+          >
+          <input
+            type="number"
+            name="amount"
+            required
+            [ngModel]="defaultValue.amount"
+            class="form-control"
+            id="transactionAmount"
+            placeholder="Amount"
+          />
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="mb-3">
+          <label for="transactionDueDate" class="form-label"
+            >Start Date<code>*</code></label
+          >
+          <input
+            type="date"
+            name="startDate"
+            required
+            [ngModel]="defaultValue.startDate"
+            class="form-control"
+            id="transactionDueDate"
+            placeholder="Transaction Due Date"
+          />
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="mb-3">
+          <label for="repeatTransaction" class="form-label"
+            >Repeat Every<code>*</code></label
+          >
+          <div class="input-group">
+            <input
+              type="number"
+              required
+              name="frequencyCount"
+              [ngModel]="defaultValue.frequencyCount"
+              class="form-control w-25"
+              max="999"
+              [class.d-none]="isNever"
+              [disabled]="isNever"
+              min="1"
+              id="frequencyCount"
+            />
+            <select
+              name="frequency"
+              required
+              [ngModel]="defaultValue.frequency"
+              class="form-control w-75"
+              id="repeatTransaction"
+            >
+              <option [value]="opt.id" *ngFor="let opt of dateFrequency">
+                {{ getLabel(opt.id) }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item" [class.d-none]="isNever">
+        <div class="mb-3">
+          <label for="transactionAmount" class="form-label"
+            >No Of Installment<code>*</code></label
+          >
+          <input
+            type="number"
+            required
+            name="noOfRepeats"
+            [disabled]="isNever"
+            [ngModel]="defaultValue.noOfRepeats"
+            class="form-control"
+            id="transactionAmount"
+            placeholder="noOfRepeats"
+          />
+        </div>
+        <input type="hidden" name="id" [ngModel]="defaultValue.id" />
+        <input type="hidden" name="type" [ngModel]="defaultValue.type" />
+      </li>
+      <li class="list-group-item d-flex">
+        <button
+          (click)="
+            addTransaction.emit({
+              data: transactionForm.value,
+              isEdit: this.isEdit
+            });
+            close(false)
+          "
+          [disabled]="transactionForm.invalid"
+          class="btn btn-outline-primary me-1 col"
+        >
+          Save Me
+        </button>
+        <button (click)="close(true)" class="btn btn-outline-dark ms-1 col">
+          Cancel
+        </button>
+      </li>
+    </ul>
+  </form>
+</div>
+
+<!-- ABC -->

@@ -1,0 +1,45 @@
+<nav class="navbar navbar-dark bg-primary fixed-top navbar-expand shadow">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand">
+        <button
+          class="btn btn-primary"
+          data-bs-toggle="offcanvas"
+          href="#mainSideNavMenu"
+          role="button"
+        >
+          <i class="fa fa-bars"></i>
+        </button>
+        <!-- Money Manager -->
+      </a>
+      <ul class="navbar-nav">
+        <app-month-select
+          (selectedMonth)="selectedMonth.emit($event)"
+          class="d-flex w-100"
+        ></app-month-select>
+        <!-- <app-year-select class="d-flex w-100"></app-year-select> -->
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button
+            class="btn btn btn-primary text-white me-2"
+            data-bs-toggle="offcanvas"
+            href="#manageTransaction"
+            role="button"
+          >
+            <i class="fa fa-plus"></i>
+          </button>
+
+          <button
+            class="btn btn btn-primary text-white"
+            data-bs-toggle="offcanvas"
+            href="#filterSideNavMenu"
+            role="button"
+          >
+            <i class="fa fa-filter"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
